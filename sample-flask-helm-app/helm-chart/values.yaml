@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: flask-app
+  repository: vramsheshaws/flask-app
   tag: latest
   pullPolicy: IfNotPresent
 
