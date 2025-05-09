@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: 'https://github.com/Venkatramshesh/gitops-argo.git'
     targetRevision: main
-    path: helm-chart      # <-- folder that contains Chart.yaml
+    path: sample-flask-helm-app/helm-chart      # <-- folder that contains Chart.yaml
 
   destination:
     server: 'https://kubernetes.default.svc'
