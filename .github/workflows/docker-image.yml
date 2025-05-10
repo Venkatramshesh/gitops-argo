@@ -1,5 +1,4 @@
-# test 
-name: CI/CD Pipeline with GitOps
+name: CI/CD Pipeline with GitOps (SSH)
 
 on:
   push:
@@ -34,13 +33,18 @@ jobs:
       run: |
         sed -i "s|tag:.*|tag: \"${{ env.IMAGE_TAG }}\"|g" sample-flask-helm-app/helm-chart/values.yaml
 
-    - name: Push updated values.yaml
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    - name: Set up SSH for pushing to GitHub
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.ACTIONS_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+    - name: Push updated values.yaml back to repo
       run: |
         git config user.name "github-actions"
         git config user.email "actions@github.com"
-        git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}
+        git remote set-url origin git@github.com:Venkatramshesh/gitops-argo.git
         git add sample-flask-helm-app/helm-chart/values.yaml
         git commit -m "Update image tag to $IMAGE_TAG"
         git push origin main
