@@ -33,13 +33,13 @@ jobs:
       run: |
         sed -i "s|tag:.*|tag: \"${{ env.IMAGE_TAG }}\"|g" sample-flask-helm-app/helm-chart/values.yaml
 
-   - name: Push updated values.yaml
-  env:
-    GH_TOKEN: ${{ secrets.GH_ACTIONS}}
-  run: |
-    git config user.name "github-actions"
-    git config user.email "actions@github.com"
-    git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}
-    git add sample-flask-helm-app/helm-chart/values.yaml
-    git commit -m "Update image tag to $IMAGE_TAG"
-    git push origin main
+    - name: Push updated values.yaml
+      env:
+        GH_TOKEN: ${{ secrets.GH_ACTIONS }}
+      run: |
+        git config user.name "github-actions"
+        git config user.email "actions@github.com"
+        git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}
+        git add sample-flask-helm-app/helm-chart/values.yaml
+        git commit -m "Update image tag to $IMAGE_TAG"
+        git push origin main
