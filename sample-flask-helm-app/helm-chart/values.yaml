@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: vramsheshaws/flask-app
-  tag: "2ed9a6e"
+  tag: "b9254ec"
   pullPolicy: IfNotPresent
 
 service:
