@@ -35,7 +35,7 @@ jobs:
 
    - name: Push updated values.yaml
   env:
-    GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    GH_TOKEN: ${{ secrets.GH_ACTIONS}}
   run: |
     git config user.name "github-actions"
     git config user.email "actions@github.com"
